@@ -28,16 +28,123 @@
         position: relative;
         z-index: 10;
       }
+
+      /* --- SPLASH SCREEN STYLES --- */
+      #splash-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background-color: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.6s ease-out, visibility 0.6s;
+      }
+      
+      #splash-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .splash-content {
+        position: relative;
+        text-align: center;
+        animation: luxFadeInUp 0.8s ease-out;
+      }
+
+      .splash-logo-container {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+      }
+
+      .splash-logo {
+        width: 100%;
+        height: 100%;
+        background: #050505;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+        position: relative;
+        z-index: 2;
+      }
+
+      .splash-logo svg {
+        color: #a78bfa;
+        width: 40px;
+        height: 40px;
+      }
+      
+      .splash-glow {
+        position: absolute;
+        inset: -10px;
+        background: radial-gradient(circle, rgba(139,92,246,0.4) 0%, transparent 70%);
+        border-radius: 50%;
+        z-index: 1;
+        animation: pulseGlow 2s infinite;
+      }
+
+      .splash-title {
+        font-family: 'Tajawal', sans-serif;
+        font-size: 3rem;
+        font-weight: 900;
+        color: white;
+        margin-bottom: 4px;
+        letter-spacing: -1px;
+        text-shadow: 0 0 20px rgba(255,255,255,0.2);
+      }
+
+      .splash-subtitle {
+        font-size: 0.75rem;
+        color: #64748b;
+        font-weight: 800;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+      }
+
+      .splash-loader {
+        width: 140px;
+        height: 3px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 3px;
+        overflow: hidden;
+        margin: 30px auto 0;
+        position: relative;
+      }
+
+      .splash-loader-bar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background: linear-gradient(90deg, #8b5cf6, #d946ef);
+        width: 0%;
+        animation: loadingBar 2s ease-in-out infinite;
+      }
+
+      @keyframes pulseGlow {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 0.2; }
+      }
+
+      @keyframes loadingBar {
+        0% { width: 0%; left: 0; }
+        50% { width: 50%; left: 25%; }
+        100% { width: 100%; left: 100%; }
+      }
       
       /* --- Global Input Styling (Hide Spin Buttons) --- */
-      /* Chrome, Safari, Edge, Opera */
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
       }
-
-      /* Firefox */
       input[type=number] {
         -moz-appearance: textfield;
       }
@@ -119,8 +226,7 @@
         100% { transform: translateY(-100px) scale(1); opacity: var(--opacity); }
       }
       
-      /* --- Luxurious Animations --- */
-      
+      /* --- Animations --- */
       @keyframes luxFadeInUp {
         0% { opacity: 0; transform: translateY(20px) scale(0.98); }
         100% { opacity: 1; transform: translateY(0) scale(1); }
@@ -135,7 +241,7 @@
         from { opacity: 0; }
         to { opacity: 1; }
       }
-
+      
       @keyframes motionSlideLeft {
         from { opacity: 0; transform: translateX(-50px); }
         to { opacity: 1; transform: translateX(0); }
@@ -151,32 +257,12 @@
         to { opacity: 1; transform: scale(1); filter: blur(0); }
       }
 
-      .animate-lux-up {
-        animation: luxFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-
-      .animate-lux-scale {
-        animation: luxScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      }
-
-      .animate-fade-in {
-        animation: fadeIn 0.5s ease-out forwards;
-      }
-
-      .motion-slide-left {
-        animation: motionSlideLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        opacity: 0;
-      }
-
-      .motion-blur-left {
-        animation: motionBlurLeft 0.8s ease-out forwards;
-        opacity: 0;
-      }
-
-      .motion-focus {
-        animation: motionFocus 1s ease-out forwards;
-        opacity: 0;
-      }
+      .animate-lux-up { animation: luxFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      .animate-lux-scale { animation: luxScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+      .motion-slide-left { animation: motionSlideLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; opacity: 0; }
+      .motion-blur-left { animation: motionBlurLeft 0.8s ease-out forwards; opacity: 0; }
+      .motion-focus { animation: motionFocus 1s ease-out forwards; opacity: 0; }
 
       .glass-panel {
         background: rgba(10, 10, 10, 0.6);
@@ -268,9 +354,27 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-pKVr-mCO.js"></script>
+  <script type="module" crossorigin src="/assets/index-CcA05ZoX.js"></script>
 </head>
   <body>
+    <!-- Splash Screen Markup -->
+    <div id="splash-screen">
+      <div class="splash-content">
+        <div class="splash-logo-container">
+          <div class="splash-glow"></div>
+          <div class="splash-logo">
+            <!-- Graduation Cap SVG Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+        </div>
+        <div class="splash-title">إدراك</div>
+        <div class="splash-subtitle">IDRAAK AI</div>
+        <div class="splash-loader">
+          <div class="splash-loader-bar"></div>
+        </div>
+      </div>
+    </div>
+
     <div id="root"></div>
     
     <div class="stars-container" id="stars-container"></div>
