@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,18 +15,81 @@
         margin: 0;
         padding: 0;
         background-color: #000000;
+        overflow-x: hidden;
       }
       body {
         font-family: 'Tajawal', sans-serif;
         color: #ffffff;
-        overflow-x: hidden;
         -webkit-tap-highlight-color: transparent;
       }
       
       #root {
         position: relative;
         z-index: 10;
-        min-height: 100%;
+      }
+
+      /* --- GPU ACCELERATED STARS CSS --- */
+      .stars-container-home {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .stars-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        will-change: transform;
+      }
+
+      .stars-small {
+        box-shadow: 
+          457px 164px #fff, 1654px 105px #fff, 1235px 1251px #fff, 1421px 1867px #fff, 
+          1852px 145px #fff, 1548px 154px #fff, 1245px 1452px #fff, 125px 1452px #fff, 
+          1452px 125px #fff, 854px 1254px #fff, 125px 854px #fff, 1452px 1854px #fff, 
+          12px 1254px #fff, 1854px 12px #fff, 145px 145px #fff, 1854px 1854px #fff, 
+          500px 500px #fff, 1200px 200px #fff, 300px 1500px #fff, 1700px 800px #fff, 
+          900px 1800px #fff, 200px 100px #fff, 1500px 400px #fff, 600px 1200px #fff, 
+          1100px 1700px #fff, 400px 100px #fff, 800px 300px #fff, 100px 1900px #fff,
+          700px 200px #fff, 1400px 900px #fff, 250px 1100px #fff, 1600px 1400px #fff,
+          1000px 50px #fff, 350px 1750px #fff, 1900px 600px #fff, 850px 450px #fff,
+          50px 550px #fff, 1300px 1300px #fff, 150px 150px #fff, 1750px 1750px #fff;
+        width: 1px;
+        height: 1px;
+        opacity: 0.45;
+        animation: animStar 200s linear infinite;
+      }
+
+      .stars-medium {
+        box-shadow: 
+          245px 456px #fff, 1254px 1854px #fff, 145px 1254px #fff, 1854px 145px #fff, 
+          854px 12px #fff, 12px 854px #fff, 1452px 1452px #fff, 452px 452px #fff, 
+          1000px 1000px #fff, 150px 1700px #fff, 1800px 300px #fff, 500px 1300px #fff, 
+          1200px 600px #fff, 200px 200px #fff, 1600px 1600px #fff, 300px 800px #fff,
+          900px 1400px #fff, 1500px 200px #fff, 600px 1900px #fff, 100px 400px #fff,
+          1100px 850px #fff, 1700px 1200px #fff, 450px 1550px #fff, 1350px 50px #fff;
+        width: 1.5px;
+        height: 1.5px;
+        opacity: 0.3;
+        animation: animStar 140s linear infinite, twinkle 7s ease-in-out infinite;
+      }
+
+      @keyframes animStar {
+        from { transform: translateY(0px); }
+        to { transform: translateY(-2000px); }
+      }
+
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.1; }
       }
 
       /* --- SPLASH SCREEN STYLES --- */
@@ -150,83 +212,6 @@
         -moz-appearance: textfield;
       }
 
-      /* --- Background Layers --- */
-      .nebula-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: -10;
-        background: #000000;
-        overflow: hidden;
-      }
-
-      .nebula-blob {
-        position: absolute;
-        filter: blur(80px);
-        opacity: 0.4;
-        animation: float 20s infinite alternate;
-        border-radius: 50%;
-      }
-
-      .blob-1 {
-        top: -10%;
-        left: 20%;
-        width: 50vw;
-        height: 50vw;
-        background: radial-gradient(circle, #4c1d95 0%, transparent 70%);
-      }
-
-      .blob-2 {
-        bottom: -10%;
-        right: -10%;
-        width: 60vw;
-        height: 60vw;
-        background: radial-gradient(circle, #3b0764 0%, transparent 70%);
-        animation-delay: -5s;
-      }
-
-      .blob-3 {
-        top: 40%;
-        left: -20%;
-        width: 40vw;
-        height: 40vw;
-        background: radial-gradient(circle, #1e1b4b 0%, transparent 70%);
-        animation-delay: -10s;
-      }
-
-      @keyframes float {
-        0% { transform: translate(0, 0) scale(1); }
-        50% { transform: translate(30px, -30px) scale(1.1); }
-        100% { transform: translate(-20px, 20px) scale(0.95); }
-      }
-
-      .stars-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -5;
-        pointer-events: none;
-      }
-      
-      .star {
-        position: absolute;
-        background: white;
-        border-radius: 50%;
-        animation: twinkle var(--duration) ease-in-out infinite;
-        opacity: var(--opacity);
-        box-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
-      }
-
-      @keyframes twinkle {
-        0% { transform: translateY(0) scale(1); opacity: var(--opacity); }
-        50% { opacity: 0.2; }
-        100% { transform: translateY(-100px) scale(1); opacity: var(--opacity); }
-      }
-      
       /* --- Animations --- */
       @keyframes luxFadeInUp {
         0% { opacity: 0; transform: translateY(20px) scale(0.98); }
@@ -243,100 +228,35 @@
         to { opacity: 1; }
       }
       
-      @keyframes motionSlideLeft {
-        from { opacity: 0; transform: translateX(-50px); }
-        to { opacity: 1; transform: translateX(0); }
-      }
-
-      @keyframes motionBlurLeft {
-        from { opacity: 0; transform: translateX(-30px); filter: blur(10px); }
-        to { opacity: 1; transform: translateX(0); filter: blur(0); }
-      }
-
-      @keyframes motionFocus {
-        from { opacity: 0; transform: scale(0.95); filter: blur(4px); }
-        to { opacity: 1; transform: scale(1); filter: blur(0); }
-      }
-
       .animate-lux-up { animation: luxFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
       .animate-lux-scale { animation: luxScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
       .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
-      .motion-slide-left { animation: motionSlideLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; opacity: 0; }
-      .motion-blur-left { animation: motionBlurLeft 0.8s ease-out forwards; opacity: 0; }
-      .motion-focus { animation: motionFocus 1s ease-out forwards; opacity: 0; }
 
       .glass-panel {
-        background: rgba(10, 10, 10, 0.6);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(15, 15, 15, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.3s ease;
       }
       
       .glass-panel:hover {
-        border-color: rgba(255, 255, 255, 0.15);
-      }
-
-      /* --- Uiverse File Upload Card --- */
-      .uiverse-upload-card {
-        width: 240px;
-        height: 300px;
-        background: #07182E;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        place-content: center;
-        place-items: center;
-        overflow: hidden;
-        border-radius: 20px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-      }
-
-      .uiverse-upload-card:hover {
-        transform: translateY(-5px) scale(1.02);
-      }
-
-      .uiverse-upload-card::before {
-        content: '';
-        position: absolute;
-        width: 140px;
-        background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
-        height: 150%;
-        animation: rotBGimg 3s linear infinite;
-        transition: all 0.2s linear;
-      }
-
-      @keyframes rotBGimg {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
-
-      .uiverse-upload-card::after {
-        content: '';
-        position: absolute;
-        background: #07182E;
-        inset: 4px;
-        border-radius: 16px;
-      }
-
-      .uiverse-upload-card > * {
-        z-index: 1;
+        border-color: rgba(255, 255, 255, 0.1);
       }
 
       ::-webkit-scrollbar {
         width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #09090b; 
+        background: #000000; 
       }
       ::-webkit-scrollbar-thumb {
-        background: #27272a; 
+        background: #1a1a1a; 
         border-radius: 4px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #3f3f46; 
+        background: #333333; 
       }
     </style>
 
@@ -355,7 +275,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-Bg4s-2yT.js"></script>
+  <script type="module" crossorigin src="/assets/index-nqNMJ3Fd.js"></script>
 </head>
   <body>
     <!-- Splash Screen Markup -->
@@ -364,7 +284,6 @@
         <div class="splash-logo-container">
           <div class="splash-glow"></div>
           <div class="splash-logo">
-            <!-- Graduation Cap SVG Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           </div>
         </div>
@@ -377,35 +296,5 @@
     </div>
 
     <div id="root"></div>
-    
-    <div class="stars-container" id="stars-container"></div>
-    
-    <div class="nebula-bg">
-      <div class="nebula-blob blob-1"></div>
-      <div class="nebula-blob blob-2"></div>
-      <div class="nebula-blob blob-3"></div>
-      <div style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 50px 50px; opacity: 0.05; width: 100%; height: 100%; position: absolute;"></div>
-    </div>
-
-    <script>
-      const starsContainer = document.getElementById('stars-container');
-      const starCount = 100;
-      for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        const size = Math.random() * 2 + 1;
-        const duration = Math.random() * 3 + 2;
-        const opacity = Math.random() * 0.7 + 0.3;
-        star.style.left = `${x}%`;
-        star.style.top = `${y}%`;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.setProperty('--duration', `${duration}s`);
-        star.style.setProperty('--opacity', opacity);
-        starsContainer.appendChild(star);
-      }
-    </script>
 </body>
 </html>
