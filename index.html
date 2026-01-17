@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>إدراك | منصة الاختبارات العالمية</title>
+    <title>إدراك | تحويل الملفات إلى اختبارات</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -16,59 +16,61 @@
         margin: 0;
         padding: 0;
         background-color: #000000;
-        overflow: hidden;
+        overflow-x: hidden;
+        scroll-behavior: auto !important;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
       }
       
+      ::-webkit-scrollbar {
+        display: none;
+        width: 0 !important;
+        height: 0 !important;
+      }
+
+      body {
+        font-family: 'Tajawal', sans-serif;
+        color: #ffffff;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      #root {
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Splash Screen Styles */
       #splash-screen {
         position: fixed;
         inset: 0;
-        background: #000;
+        background: #000000;
         z-index: 9999;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.8s ease;
+        transition: opacity 0.6s ease-out, visibility 0.6s;
+      }
+      
+      #splash-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
       }
 
       .splash-logo-container {
         position: relative;
         width: 120px;
         height: 120px;
-        animation: logoBounce 2s infinite ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: splashPulse 2s infinite ease-in-out;
       }
 
-      .splash-glow {
-        position: absolute;
-        inset: -20px;
-        background: radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%);
-        border-radius: 50%;
-        animation: glowPulse 2s infinite alternate;
-      }
-
-      @keyframes glowPulse {
-        from { transform: scale(1); opacity: 0.5; }
-        to { transform: scale(1.5); opacity: 0.8; }
-      }
-
-      @keyframes logoBounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-      }
-
-      #splash-screen.hidden {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      body {
-        font-family: 'Tajawal', sans-serif;
-        color: #ffffff;
-      }
-      
-      #root {
-        position: relative;
-        z-index: 10;
+      @keyframes splashPulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.1); opacity: 1; }
       }
 
       /* --- GALAXY DENSITY STARS SYSTEM --- */
@@ -99,11 +101,50 @@
           457px 164px #fff, 1654px 105px #fff, 1235px 1251px #fff, 1421px 1867px #fff, 1852px 145px #fff, 
           1548px 154px #fff, 1245px 1452px #fff, 125px 1452px #fff, 1452px 125px #fff, 854px 1254px #fff, 
           125px 854px #fff, 1452px 1854px #fff, 12px 1254px #fff, 1854px 12px #fff, 145px 145px #fff, 
-          1854px 1854px #fff, 500px 500px #fff, 1200px 200px #fff, 300px 1500px #fff, 1700px 800px #fff;
+          1854px 1854px #fff, 500px 500px #fff, 1200px 200px #fff, 300px 1500px #fff, 1700px 800px #fff, 
+          900px 1800px #fff, 200px 100px #fff, 1500px 400px #fff, 600px 1200px #fff, 1100px 1700px #fff, 
+          400px 100px #fff, 800px 300px #fff, 100px 1900px #fff, 250px 250px #fff, 1350px 450px #fff, 
+          750px 1650px #fff, 1950px 850px #fff, 50px 1250px #fff, 1550px 50px #fff, 350px 650px #fff, 
+          1750px 1450px #fff, 950px 250px #fff, 1150px 1950px #fff, 550px 950px #fff, 1850px 1250px #fff,
+          100px 100px #fff, 1200px 1200px #fff, 800px 400px #fff, 400px 800px #fff, 1500px 1500px #fff, 
+          1900px 100px #fff, 100px 1900px #fff, 600px 600px #fff, 50px 50px #fff, 1950px 1950px #fff,
+          450px 1500px #fff, 1500px 450px #fff, 800px 800px #fff, 200px 1800px #fff, 1800px 200px #fff,
+          1000px 1000px #fff, 1400px 200px #fff, 200px 1400px #fff, 1600px 1600px #fff, 300px 300px #fff,
+          10px 10px #fff, 190px 190px #fff, 340px 120px #fff, 890px 450px #fff, 1200px 300px #fff,
+          150px 1700px #fff, 1800px 1500px #fff, 900px 900px #fff, 450px 450px #fff, 1250px 100px #fff,
+          75px 125px #fff, 350px 950px #fff, 1650px 250px #fff, 1100px 850px #fff, 1450px 1650px #fff,
+          220px 550px #fff, 880px 150px #fff, 1300px 1100px #fff, 1900px 700px #fff, 500px 1400px #fff,
+          111px 222px #fff, 333px 444px #fff, 555px 666px #fff, 777px 888px #fff, 999px 111px #fff,
+          1222px 1333px #fff, 1444px 1555px #fff, 1666px 1777px #fff, 1888px 1999px #fff, 100px 500px #fff;
         width: 1px;
         height: 1px;
         opacity: 0.8;
         animation: animStar 180s linear infinite;
+      }
+
+      .stars-medium {
+        box-shadow: 
+          245px 456px #fff, 1254px 1854px #fff, 145px 1254px #fff, 1854px 145px #fff, 
+          854px 12px #fff, 12px 854px #fff, 1452px 1452px #fff, 350px 350px #fff,
+          1650px 1150px #fff, 550px 1750px #fff, 950px 550px #fff, 1850px 1950px #fff,
+          700px 700px #fff, 1300px 1300px #fff, 100px 1500px #fff, 1500px 100px #fff,
+          400px 400px #fff, 1800px 600px #fff, 600px 1800px #fff, 1100px 1100px #fff,
+          250px 250px #fff, 1750px 1750px #fff, 850px 1250px #fff, 1250px 850px #fff,
+          50px 1850px #fff, 1850px 50px #fff, 1000px 200px #fff, 200px 1000px #fff;
+        width: 1.8px;
+        height: 1.8px;
+        opacity: 0.6;
+        animation: animStar 120s linear infinite;
+      }
+
+      .stars-large {
+        box-shadow: 
+          500px 500px #fff, 1500px 1500px #fff, 300px 1700px #fff, 1700px 300px #fff,
+          1000px 1000px #fff, 50px 50px #fff, 1950px 1950px #fff, 800px 200px #fff;
+        width: 2.5px;
+        height: 2.5px;
+        opacity: 0.4;
+        animation: animStar 80s linear infinite;
       }
 
       @keyframes animStar {
@@ -113,9 +154,154 @@
 
       @keyframes fastFadeIn { from { opacity: 0; } to { opacity: 1; } }
       @keyframes fastSlideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes pulse-light {
+        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+      }
       
       .animate-lux-up { animation: fastSlideUp 0.3s ease-out forwards; }
       .animate-lux-scale { animation: fastFadeIn 0.2s ease-out forwards; }
+      .animate-fade-in { animation: fastFadeIn 0.3s ease-out forwards; }
+      .animate-pulse-light { animation: pulse-light 1.5s infinite; }
+
+      .glass-panel {
+        background: rgba(10, 10, 10, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* --- UIVERSE CONFIG CARD STYLE (COMPACT FOR MOBILE) --- */
+      .uiverse-config-card {
+        width: 95%;
+        max-width: 340px;
+        border-radius: 32px;
+        padding: 3px;
+        box-shadow: rgba(16, 185, 129, 0.3) 0 20px 60px -10px;
+        background-image: linear-gradient(144deg,#10b981, #059669 50%,#000000);
+        position: relative;
+        z-index: 10;
+        height: auto; 
+      }
+
+      .uiverse-config-content {
+        background: rgb(5, 5, 5);
+        border-radius: 29px;
+        width: 100%;
+        height: auto; 
+        padding: 24px 20px;
+      }
+
+      /* --- ENHANCED SKILL CARD THEMES --- */
+      
+      /* Web Theme: Water Flow (Clear & Bright) */
+      @keyframes waveAnimation {
+        0% { transform: scale(1) translateY(0); opacity: 0.2; }
+        50% { transform: scale(1.2) translateY(-20px); opacity: 0.6; }
+        100% { transform: scale(1) translateY(0); opacity: 0.2; }
+      }
+
+      .theme-web-fluid {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.2) 100%);
+        overflow: hidden;
+      }
+      .theme-web-fluid::before, .theme-web-fluid::after {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.4), transparent 70%);
+        border-radius: 40%;
+        animation: rotateWaves 10s linear infinite;
+        z-index: 1;
+      }
+      .theme-web-fluid::after {
+        animation: rotateWaves 15s linear infinite;
+        opacity: 0.3;
+        bottom: -45%;
+      }
+      @keyframes rotateWaves {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      /* Mobile Theme: Vibrant Floating Orbs */
+      @keyframes orbFloat {
+        0% { transform: translate(0, 0) scale(1); filter: brightness(1); }
+        50% { transform: translate(30px, -40px) scale(1.2); filter: brightness(1.5); }
+        100% { transform: translate(0, 0) scale(1); filter: brightness(1); }
+      }
+
+      .theme-mobile-orbs {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.15), transparent 60%);
+        overflow: hidden;
+      }
+      .theme-mobile-orbs::before {
+        content: "";
+        position: absolute;
+        width: 100px; height: 100px;
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.5), transparent 70%);
+        top: 10%; left: 10%;
+        border-radius: 50%;
+        filter: blur(20px);
+        animation: orbFloat 8s ease-in-out infinite;
+      }
+      .theme-mobile-orbs::after {
+        content: "";
+        position: absolute;
+        width: 80px; height: 80px;
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.4), transparent 70%);
+        bottom: 20%; right: 10%;
+        border-radius: 50%;
+        filter: blur(15px);
+        animation: orbFloat 12s ease-in-out infinite reverse;
+      }
+
+      /* Desktop Theme: High-Density Technical Starfield */
+      @keyframes technicalWarp {
+        0% { opacity: 0.3; transform: scale(1); }
+        100% { opacity: 0.9; transform: scale(1.1); }
+      }
+
+      .theme-desktop-tech {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(217, 70, 239, 0.1), transparent 80%);
+        overflow: hidden;
+      }
+      .theme-desktop-tech::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: 
+          radial-gradient(2px 2px at 10% 20%, #fff, transparent),
+          radial-gradient(1.5px 1.5px at 30% 50%, #fff, transparent),
+          radial-gradient(2px 2px at 70% 30%, #fff, transparent),
+          radial-gradient(1.5px 1.5px at 90% 80%, #fff, transparent),
+          radial-gradient(2.5px 2.5px at 50% 10%, #fff, transparent),
+          radial-gradient(2px 2px at 20% 90%, #fff, transparent);
+        background-size: 100px 100px;
+        animation: technicalWarp 3s ease-in-out infinite alternate;
+        z-index: 1;
+      }
+      .theme-desktop-tech::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px);
+        opacity: 0.2;
+      }
+
     </style>
 
 <link rel="stylesheet" href="/index.css">
@@ -133,21 +319,29 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-Cu_UtgfL.js"></script>
+  <script type="module" crossorigin src="/assets/index-Dbt2H2NU.js"></script>
 </head>
   <body>
+    <!-- Splash Screen -->
     <div id="splash-screen">
-      <div class="splash-glow"></div>
       <div class="splash-logo-container">
-        <!-- SVG شعار بسيط كنسخة مؤقتة لمتصفح الـ HTML قبل تحميل React -->
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 15 L82 70 H18 L50 15Z" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="2"/>
-          <path d="M50 25 L40 50 H60 L50 75" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="splash-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8b5cf6" />
+              <stop offset="100%" stop-color="#10b981" />
+            </linearGradient>
+          </defs>
+          <path d="M10 50C10 50 30 25 50 25C70 25 90 50 90 50C90 50 70 75 50 75C30 75 10 50 10 50Z" stroke="url(#splash-gradient)" stroke-width="2" stroke-opacity="0.3"/>
+          <path d="M50 20L75 50L50 80L25 50L50 20Z" fill="url(#splash-gradient)" fill-opacity="0.1" stroke="url(#splash-gradient)" stroke-width="1.5"/>
+          <path d="M50 20V80M25 50H75M50 20L35 50L50 80L65 50L50 20Z" stroke="url(#splash-gradient)" stroke-width="0.8" stroke-opacity="0.5"/>
+          <circle cx="50" cy="50" r="5" fill="url(#splash-gradient)"/>
         </svg>
       </div>
-      <h1 style="font-size: 24px; font-weight: 900; margin-top: 20px; color: white; letter-spacing: -1px;">إدراك</h1>
-      <p style="font-size: 10px; font-weight: 800; color: #444; text-transform: uppercase; margin-top: 5px; letter-spacing: 2px;">Intelligent Academia</p>
+      <div style="margin-top: 24px; font-family: 'Tajawal', sans-serif; font-weight: 900; font-size: 24px; color: white; letter-spacing: -0.05em;">إدراك الذكي</div>
+      <div style="margin-top: 8px; font-family: 'Tajawal', sans-serif; font-weight: 400; font-size: 10px; color: #8b5cf6; text-transform: uppercase; letter-spacing: 0.3em;">Idraak Premium Platform</div>
     </div>
+
     <div id="root"></div>
 </body>
 </html>
