@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- الأيقونة التي تظهر في المتصفح ونتائج البحث عبر رابط Google Drive المباشر الجديد -->
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/d/1crM39hfKeI9-qR1G2o02Gx6WH24w0eKy" />
     <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1crM39hfKeI9-qR1G2o02Gx6WH24w0eKy" />
     
@@ -43,7 +42,7 @@
         z-index: 10;
       }
 
-      /* Clean Splash Screen */
+      /* Splash Screen */
       #splash-screen {
         position: fixed;
         inset: 0;
@@ -62,97 +61,63 @@
         pointer-events: none;
       }
 
-      .splash-logo-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: logoArrival 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-      }
-
-      @keyframes logoArrival {
-        0% { transform: scale(0.8); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
-      }
-
-      /* Ultra Dense Animated CIRCULAR Colored Stars Background */
-      .stars-container-home {
+      /* Pure Black Master Background with Animated Starfield */
+      .bg-master-container {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         z-index: 0;
-        overflow: hidden;
+        background-color: #000000;
         pointer-events: none;
-        background: #000000;
+        overflow: hidden;
       }
 
-      .stars-layer {
+      /* Moving Stars Layer 1 (Large & Clear) */
+      .bg-master-container::before {
+        content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2000px;
-        background: transparent;
+        inset: -100px; /* Over-padding to hide edges during drift */
+        background-repeat: repeat;
+        background-image: 
+          radial-gradient(1.5px 1.5px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 50px 70px, #ffffff, rgba(0,0,0,0)),
+          radial-gradient(1.5px 1.5px at 90px 40px, #7c3aed, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 130px 80px, #ffffff, rgba(0,0,0,0)),
+          radial-gradient(1.5px 1.5px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 190px 10px, #a78bfa, rgba(0,0,0,0));
+        background-size: 200px 200px;
+        opacity: 0.5;
+        animation: stars-drift-slow 60s linear infinite;
       }
 
-      @keyframes starsMove {
-        from { transform: translateY(0px); }
-        to { transform: translateY(-2000px); }
-      }
-
-      /* Small Circular Stars */
-      .stars-small {
-        width: 2px;
-        height: 2px;
-        border-radius: 50%;
-        box-shadow: 
-          456px 123px rgba(124, 58, 237, 0.9), 789px 456px rgba(59, 130, 246, 0.9), 123px 789px rgba(245, 158, 11, 0.8), 
-          1500px 200px rgba(139, 92, 246, 0.9), 1200px 800px rgba(255, 255, 255, 0.6), 300px 1600px rgba(124, 58, 237, 0.9), 
-          1800px 500px rgba(59, 130, 246, 0.8), 100px 1100px rgba(245, 158, 11, 0.8), 900px 1400px rgba(255, 255, 255, 0.6), 
-          500px 200px rgba(139, 92, 246, 0.9), 1600px 1200px rgba(124, 58, 237, 0.7), 200px 300px rgba(59, 130, 246, 0.7),
-          800px 100px rgba(245, 158, 11, 0.7), 1400px 1700px rgba(139, 92, 246, 0.8), 1000px 400px rgba(255, 255, 255, 0.5),
-          350px 950px rgba(124, 58, 237, 0.8), 1700px 150px rgba(59, 130, 246, 0.8), 650px 1850px rgba(245, 158, 11, 0.7),
-          1100px 1100px rgba(255, 255, 255, 0.6), 150px 1450px rgba(139, 92, 246, 0.9), 1900px 1000px rgba(255, 255, 255, 0.4);
-        animation: starsMove 110s linear infinite;
-      }
-      
-      /* Medium Circular Stars */
-      .stars-medium {
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        box-shadow: 
-          200px 500px rgba(124, 58, 237, 0.8), 600px 100px rgba(245, 158, 11, 0.8), 1000px 900px rgba(59, 130, 246, 0.8), 
-          1400px 300px rgba(139, 92, 246, 0.8), 400px 1200px rgba(255, 255, 255, 0.5), 1600px 1500px rgba(124, 58, 237, 0.8), 
-          800px 1800px rgba(245, 158, 11, 0.8), 100px 100px rgba(59, 130, 246, 0.8), 500px 500px rgba(255, 255, 255, 0.4),
-          1200px 1300px rgba(139, 92, 246, 0.7), 1800px 900px rgba(124, 58, 237, 0.7), 300px 1900px rgba(59, 130, 246, 0.7),
-          1500px 600px rgba(245, 158, 11, 0.7), 750px 1450px rgba(255, 255, 255, 0.4);
-        animation: starsMove 150s linear infinite;
-      }
-
-      /* Large Glowing Circular Orbs */
-      .stars-large {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        filter: blur(1.5px);
-        box-shadow: 
-          400px 800px rgba(124, 58, 237, 0.6), 1200px 200px rgba(245, 158, 11, 0.6), 200px 1500px rgba(59, 130, 246, 0.6), 
-          1800px 1100px rgba(255, 255, 255, 0.4), 900px 600px rgba(139, 92, 246, 0.6), 1500px 1800px rgba(124, 58, 237, 0.5),
-          700px 1300px rgba(245, 158, 11, 0.5), 100px 400px rgba(59, 130, 246, 0.5), 1850px 50px rgba(255, 255, 255, 0.3);
-        animation: starsMove 200s linear infinite;
-      }
-
-      .stars-small::after, .stars-medium::after, .stars-large::after {
-        content: " ";
+      /* Moving Stars Layer 2 (Smaller & Twinkling) */
+      .bg-master-container::after {
+        content: "";
         position: absolute;
-        top: 2000px;
-        width: inherit;
-        height: inherit;
-        box-shadow: inherit;
-        border-radius: inherit;
+        inset: -100px;
+        background-repeat: repeat;
+        background-image: 
+          radial-gradient(1px 1px at 10px 10px, #ffffff, rgba(0,0,0,0)),
+          radial-gradient(1.2px 1.2px at 100px 100px, #ffffff, rgba(0,0,0,0)),
+          radial-gradient(1px 1px at 150px 150px, #7c3aed, rgba(0,0,0,0));
+        background-size: 300px 300px;
+        opacity: 0.4;
+        animation: stars-drift-fast 40s linear infinite, stars-twinkle 4s infinite ease-in-out;
+      }
+
+      /* Animations */
+      @keyframes stars-drift-slow {
+        from { transform: translate(0, 0); }
+        to { transform: translate(200px, 200px); }
+      }
+
+      @keyframes stars-drift-fast {
+        from { transform: translate(0, 0); }
+        to { transform: translate(-300px, 300px); }
+      }
+
+      @keyframes stars-twinkle {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 0.6; }
       }
 
       @keyframes fastFadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -162,15 +127,15 @@
       .animate-lux-scale { animation: fastFadeIn 0.3s ease-out forwards; }
 
       .glass-panel {
-        background: rgba(8, 8, 8, 0.8);
+        background: rgba(8, 8, 8, 0.7);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.03);
       }
     </style>
 
 <link rel="stylesheet" href="/index.css">
-  <script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "@google/genai": "https://esm.sh/@google/genai@^1.35.0",
@@ -184,23 +149,21 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-2HUIGdZU.js"></script>
+  <script type="module" crossorigin src="/assets/index-CxnqZ9zq.js"></script>
 </head>
   <body>
+    <!-- Pure Black Base with Floating Stars -->
+    <div class="bg-master-container"></div>
+
     <!-- Splash Screen -->
     <div id="splash-screen">
       <div class="splash-logo-wrapper">
-        <!-- Optimized Final Icon -->
         <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="5" y="5" width="90" height="90" rx="28" fill="#7c3aed" />
-          <!-- Gown (Robe) - Matched Style -->
           <path d="M40 68C40 74 44 78 50 78C56 78 60 74 60 68" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" />
           <path d="M50 78V84" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4" />
-          <!-- Cap Top -->
           <path d="M50 34L76 44L50 54L24 44L50 34Z" fill="white" />
-          <!-- Cap Tassel -->
           <path d="M76 44V55C76 55 74.5 57 72.5 57" stroke="white" stroke-width="2" stroke-linecap="round" />
-          <!-- Cap Hollow Base -->
           <path d="M38 49V53C38 58 43 61 50 61C57 61 62 58 62 53V49" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none" />
         </svg>
       </div>
