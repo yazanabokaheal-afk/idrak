@@ -147,6 +147,17 @@
         background-size: 200px 200px;
         opacity: 0.3;
         animation: stars-drift-slow 100s linear infinite;
+        transition: opacity 0.5s ease;
+      }
+
+      /* Class to hide stars for better performance */
+      .bg-master-container.stars-hidden::before {
+        opacity: 0 !important;
+        animation: none !important;
+      }
+
+      .bg-master-container.stars-dimmed::before {
+        opacity: 0.1;
       }
 
       @keyframes stars-drift-slow {
@@ -184,7 +195,7 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-Cy_rFjM2.js"></script>
+  <script type="module" crossorigin src="/assets/index-COUH0F7X.js"></script>
 </head>
   <body>
     <div class="bg-master-container"></div>
